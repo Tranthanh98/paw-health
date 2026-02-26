@@ -1,7 +1,13 @@
 import { View, type ViewProps } from "react-native";
 import { ThemeText } from "./ThemeText";
 
-type PillTone = "primary" | "secondary" | "accent" | "success" | "error";
+type PillTone =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "success"
+  | "error"
+  | "muted";
 
 type PillProps = ViewProps & {
   label: string;
@@ -15,6 +21,7 @@ const toneClassName: Record<PillTone, string> = {
   accent: "border-accent bg-background",
   success: "border-success bg-background",
   error: "border-error bg-background",
+  muted: "border-text-secondary/30 bg-surface",
 };
 
 const textToneClassName: Record<PillTone, string> = {
@@ -23,6 +30,7 @@ const textToneClassName: Record<PillTone, string> = {
   accent: "text-accent",
   success: "text-success",
   error: "text-error",
+  muted: "text-text-secondary",
 };
 
 export function Pill({
