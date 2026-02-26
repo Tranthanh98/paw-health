@@ -1,27 +1,23 @@
 import { Button, Card, Pill, ThemeText } from "@/components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function ProfileScreen() {
+export default function ServicesScreen() {
   return (
     <SafeAreaView className="flex-1 bg-background px-5">
-      <ThemeText variant="title">Profile</ThemeText>
+      <ThemeText variant="title">Services</ThemeText>
       <ThemeText tone="muted" className="mt-2">
-        Manage pet profiles, rewards and application preferences.
+        Find and book pet shops, clinics and trusted pet sitter services.
       </ThemeText>
 
       <Card className="mt-6">
-        <Pill label="Member" tone="secondary" />
+        <Pill label="Booking" tone="accent" />
         <ThemeText variant="subtitle" className="mt-3">
-          Thanh Tran
+          Discover nearby services
         </ThemeText>
         <ThemeText tone="muted" className="mt-2">
-          Update account details, loyalty points and app settings in one place.
+          Compare providers quickly and schedule appointments for your pet.
         </ThemeText>
-        <Button
-          title="Open account settings"
-          variant="surface"
-          className="mt-5"
-        />
+        <Button title="Search services" className="mt-5" />
       </Card>
     </SafeAreaView>
   );

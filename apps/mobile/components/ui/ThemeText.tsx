@@ -34,6 +34,7 @@ export function ThemeText({
     <Text
       className={`${variantClassName[variant]} ${toneClassName[tone]} ${className}`.trim()}
       {...props}
+      style={{ fontFamily: "SFProRounded" }}
     />
   );
 }

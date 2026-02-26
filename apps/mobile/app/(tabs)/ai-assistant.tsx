@@ -1,27 +1,23 @@
 import { Button, Card, Pill, ThemeText } from "@/components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function ProfileScreen() {
+export default function AIAssistantScreen() {
   return (
     <SafeAreaView className="flex-1 bg-background px-5">
-      <ThemeText variant="title">Profile</ThemeText>
+      <ThemeText variant="title">AI Assistant</ThemeText>
       <ThemeText tone="muted" className="mt-2">
-        Manage pet profiles, rewards and application preferences.
+        Chat with AI for guidance, image recognition and fast health analysis.
       </ThemeText>
 
       <Card className="mt-6">
-        <Pill label="Member" tone="secondary" />
+        <Pill label="Smart Care" tone="primary" />
         <ThemeText variant="subtitle" className="mt-3">
-          Thanh Tran
+          Ask, scan, and get instant insights
         </ThemeText>
         <ThemeText tone="muted" className="mt-2">
-          Update account details, loyalty points and app settings in one place.
+          Start a conversation or upload a photo to receive AI-powered support.
         </ThemeText>
-        <Button
-          title="Open account settings"
-          variant="surface"
-          className="mt-5"
-        />
+        <Button title="Start AI chat" className="mt-5" />
       </Card>
     </SafeAreaView>
   );

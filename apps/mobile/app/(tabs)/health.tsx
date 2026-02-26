@@ -1,27 +1,24 @@
 import { Button, Card, Pill, ThemeText } from "@/components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function ProfileScreen() {
+export default function HealthScreen() {
   return (
     <SafeAreaView className="flex-1 bg-background px-5">
-      <ThemeText variant="title">Profile</ThemeText>
+      <ThemeText variant="title">Health</ThemeText>
       <ThemeText tone="muted" className="mt-2">
-        Manage pet profiles, rewards and application preferences.
+        Medical records, vaccination schedule, weight tracking and key health
+        metrics.
       </ThemeText>
 
       <Card className="mt-6">
-        <Pill label="Member" tone="secondary" />
+        <Pill label="Health Hub" tone="secondary" />
         <ThemeText variant="subtitle" className="mt-3">
-          Thanh Tran
+          Track your pet wellness daily
         </ThemeText>
         <ThemeText tone="muted" className="mt-2">
-          Update account details, loyalty points and app settings in one place.
+          Review history, upcoming vaccines and recent indicators in one place.
         </ThemeText>
-        <Button
-          title="Open account settings"
-          variant="surface"
-          className="mt-5"
-        />
+        <Button title="Open health profile" className="mt-5" />
       </Card>
     </SafeAreaView>
   );

@@ -1,26 +1,26 @@
 import { Button, Card, Pill, ThemeText } from "@/components/ui";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <View className="flex-1 bg-background px-5 pt-8">
+    <SafeAreaView className="flex-1 bg-background px-5">
       <ThemeText variant="title" tone="primary">
-        Paw Health
+        Home
       </ThemeText>
       <ThemeText tone="muted" className="mt-2">
-        Your all-in-one pet care companion
+        Pet overview, important reminders and quick AI tips at a glance.
       </ThemeText>
 
       <Card className="mt-6">
-        <Pill label="AI Assistant" tone="accent" />
+        <Pill label="Today" tone="accent" />
         <ThemeText variant="subtitle" className="mt-3">
-          Daily health summary
+          Daily pet snapshot
         </ThemeText>
         <ThemeText tone="muted" className="mt-2">
-          Follow your pet schedule and get friendly reminders.
+          Track key activities and stay on top of upcoming care reminders.
         </ThemeText>
-        <Button title="Open Care Plan" className="mt-5" />
+        <Button title="View reminders" className="mt-5" />
       </Card>
-    </View>
+    </SafeAreaView>
   );
 }

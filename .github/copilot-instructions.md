@@ -26,6 +26,17 @@
 - `apps/mobile/app.json` references required assets under `assets/images/` (`icon.png`, `adaptive-icon.png`, `favicon.png`); don’t remove these files.
 - Theme tokens are defined in `apps/mobile/tailwind.config.js` (`primary`, `secondary`, `accent`, `background`, `surface`, `text.*`, `error`, `success`). Use these tokens instead of hardcoded colors in mobile screens.
 
+## Shared mobile UI components
+
+- Reuse existing common components in `apps/mobile/components/ui` before creating new ones.
+- Current shared exports are centralized at `apps/mobile/components/ui/index.ts` (`ThemeText`, `Card`, `Pill`, `Button`).
+- Preferred order when implementing UI:
+  1. Reuse an existing common component.
+  2. Extend that component with small, backwards-compatible props.
+  3. Create a new common component only if the pattern appears in multiple screens.
+- For screen code under `apps/mobile/app/**`, avoid redefining one-off button/card/text primitives when an equivalent shared component exists.
+- Keep iOS-like rounded style consistent (`rounded-full` for pills/buttons, large radius cards) and keep all colors mapped to theme tokens.
+
 ## Developer workflows
 
 - Install dependencies once at repo root: `pnpm install` (do not install per app manually).
