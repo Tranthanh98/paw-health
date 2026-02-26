@@ -9,7 +9,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: process.env.ALLOWED_ORIGINS?.split(",") || "*", credentials: true }));
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
+app.use(cors({
+  origin: allowedOrigins && allowedOrigins.length > 0 ? allowedOrigins : false,
+  credentials: true,
+}));
 app.use(express.json());
 
 // better-auth handler - mount at /api/auth
