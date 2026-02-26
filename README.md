@@ -2,6 +2,41 @@
 
 Paw Health là monorepo xây dựng theo triết lý **All-in-One Ecosystem**: một nền tảng giúp chủ nuôi thú cưng ("Sen") quản lý toàn bộ vòng đời của thú cưng, từ sức khỏe, dinh dưỡng, mua sắm đến các dịch vụ chăm sóc, có hỗ trợ AI.
 
+## Đặc tả UI/UX
+
+### 1. Tổng quan ứng dụng
+
+#### 1.1 Concept và định hướng
+
+Ứng dụng được thiết kế theo định hướng **ấm áp, thân thiện, tin cậy** để giảm bớt lo lắng về y tế và tăng trải nghiệm vui vẻ khi chăm sóc thú cưng. Hệ sinh thái tập trung vào quản lý toàn diện sức khỏe, dinh dưỡng, mua sắm và dịch vụ, đồng thời tối ưu cho hành vi người dùng Việt Nam như:
+
+- Ưu tiên chat trước khi mua
+- Ưu tiên thanh toán ví điện tử
+- Đánh giá cao tiện lợi của dịch vụ địa phương
+
+#### 1.2 Đối tượng mục tiêu
+
+- **Nhóm chính**: Gen Z và Millennials tại Hà Nội, TP.HCM, Đà Nẵng; bận rộn, sẵn sàng chi tiêu cao cho thú cưng như thành viên gia đình.
+- **Nhóm phụ**: phòng khám thú y, cửa hàng thú cưng, pet sitter tự do.
+
+### 2. Hệ thống thiết kế (Design System)
+
+#### 2.1 Bảng màu (Color Palette)
+
+Palette được chọn để cân bằng giữa cảm giác thân thiện và độ tin cậy chuyên môn y tế:
+
+- **Primary** `#FF8C69` (Coral Soft): Buttons, Headers, CTAs
+- **Secondary** `#20B2AA` (Sea Green): Health, Medical features
+- **Accent** `#FFD700` (Gold): AI features, Gamification
+- **Background** `#FAFAFA` (Off-white): Screen backgrounds
+- **Surface** `#FFFFFF` (White): Cards, Modals
+- **Text Primary** `#1A1A2E` (Dark Navy): Main text
+- **Text Secondary** `#6B7280` (Gray): Captions, hints
+- **Error** `#EF4444` (Red): Warnings, errors
+- **Success** `#10B981` (Green): Confirmations
+
+> NativeWind theme cho mobile đã được map theo đúng semantic tokens ở `apps/mobile/tailwind.config.js`.
+
 ## Cấu trúc workspace
 
 - `apps/api`: Backend API (Express + TypeScript)

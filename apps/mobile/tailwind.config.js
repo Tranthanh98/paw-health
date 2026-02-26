@@ -5,8 +5,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#4CAF50",
-        secondary: "#2196F3",
+        primary: "#FF8C69",
+        secondary: "#20B2AA",
+        accent: "#FFD700",
+        background: "#FAFAFA",
+        surface: "#FFFFFF",
+        text: {
+          primary: "#1A1A2E",
+          secondary: "#6B7280",
+        },
+        error: "#EF4444",
+        success: "#10B981",
       },
     },
   },
