@@ -77,7 +77,7 @@ export default function ProfileScreen() {
         {/* Stats */}
         <View className="mb-6">
           <View className="flex-row gap-4">
-            <View className="flex-1 rounded-3xl p-4 bg-surface border border-background shadow-sm">
+            <View className="flex-1 rounded-3xl p-4 bg-surface border border-background">
               <View className="flex-row items-center gap-2 mb-2">
                 <View className="w-8 h-8 rounded-full bg-primary/10 items-center justify-center">
                   <PawPrint size={16} color="#FF8C69" />
@@ -91,7 +91,7 @@ export default function ProfileScreen() {
               </ThemeText>
             </View>
 
-            <View className="flex-1 rounded-3xl p-4 bg-surface border border-background shadow-sm">
+            <View className="flex-1 rounded-3xl p-4 bg-surface border border-background">
               <View className="flex-row items-center gap-2 mb-2">
                 <View className="w-8 h-8 rounded-full bg-accent/30 items-center justify-center">
                   <Crown size={16} color="#FFD700" />
