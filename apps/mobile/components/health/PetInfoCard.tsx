@@ -13,8 +13,8 @@ export function PetInfoCard({ pet, onEditPress }: PetInfoCardProps) {
   const { t } = useTranslation();
 
   return (
-    <Card className="p-0 gap-0">
-      <View className="flex-row p-4 gap-4">
+    <Card className="p-0 gap-0 rounded-[32px]">
+      <View className="flex-row p-2 gap-4">
         {/* Avatar */}
         <View className="w-[88px] h-[88px] rounded-2xl overflow-hidden">
           {pet.petImage ? (
@@ -87,7 +87,7 @@ export function PetInfoCard({ pet, onEditPress }: PetInfoCardProps) {
 
       {/* Edit button */}
       <Pressable
-        className="mx-4 mb-4 h-10 rounded-2xl bg-background items-center justify-center flex-row gap-2"
+        className="mx-2 mb-1 h-12 rounded-2xl bg-background items-center justify-center flex-row gap-2"
         onPress={onEditPress}
       >
         <Pencil size={14} color="#FF8C69" />

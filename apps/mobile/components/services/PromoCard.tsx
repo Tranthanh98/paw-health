@@ -1,4 +1,5 @@
 import { Button, ThemeText } from "@/components/ui";
+import { PawPrint } from "lucide-react-native";
 import { View } from "react-native";
 
 type PromoCardProps = {
@@ -11,7 +12,9 @@ export function PromoCard({ eyebrow, title, actionLabel }: PromoCardProps) {
   return (
     <View className="overflow-hidden rounded-3xl bg-primary p-5">
       <View className="absolute right-0 top-0 h-20 w-20 rounded-full bg-accent/30" />
-      <View className="absolute right-4 bottom-2 h-16 w-16 rounded-full bg-surface/10" />
+      <View className="absolute right-4 bottom-2">
+        <PawPrint color="#FFFFFF60" fill="#FFFFFF60" size={100} />
+      </View>
       <ThemeText className="text-xs font-bold uppercase text-surface/90">
         {eyebrow}
       </ThemeText>

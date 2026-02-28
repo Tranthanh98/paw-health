@@ -6,6 +6,7 @@ import {
   Pill,
   ThemeText,
 } from "@/components/ui";
+import { router } from "expo-router";
 import { Bell, Droplet, Syringe } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Image, Pressable, ScrollView, View } from "react-native";
@@ -64,7 +65,7 @@ export default function HomeScreen() {
               snapToInterval={152}
               decelerationRate="fast"
             >
-              <PetCard isAddCard onPress={() => console.log("Add pet")} />
+              <PetCard isAddCard onPress={() => router.push("/pet/new")} />
               <PetCard
                 petName="Bánh Bao"
                 petBreed="Golden Retriever"

@@ -21,7 +21,7 @@ export type CategoryItem = {
   key: string;
   label: string;
   icon: IconComponent;
-  tone: "primary" | "secondary" | "accent" | "success";
+  tone: "primary" | "secondary" | "accent" | "success" | "surface";
 };
 
 export type ServiceTag = {
@@ -39,7 +39,7 @@ export type ServiceCardData = {
   image: string;
   badge?: {
     label: string;
-    tone: "primary" | "secondary" | "accent";
+    tone: "primary" | "secondary" | "accent" | "surface";
     withIcon?: boolean;
   };
   tags: ServiceTag[];
@@ -57,4 +57,5 @@ export const categoryToneStyles: Record<
   secondary: { container: "bg-secondary/10", icon: themeColors.secondary },
   accent: { container: "bg-accent/20", icon: themeColors.accent },
   success: { container: "bg-success/10", icon: themeColors.success },
+  surface: { container: "bg-surface/10", icon: themeColors.surface },
 };
