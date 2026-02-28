@@ -11,6 +11,7 @@ import {
   WeightLineChart,
 } from "@/components/health";
 import { AITipCard, Card, Pill, ThemeText } from "@/components/ui";
+import { useUIStore } from "@/stores/uiStore";
 import {
   ClipboardList,
   Plus,
@@ -19,17 +20,24 @@ import {
   TrendingUp,
   Weight,
 } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HealthScreen() {
   const { t } = useTranslation();
-  const [selectedPetId, setSelectedPetId] = useState("1");
+  const { selectedPetId, setSelectedPetId } = useUIStore();
+
+  // Default to first pet on first mount
+  useEffect(() => {
+    if (!selectedPetId) setSelectedPetId(MOCK_PETS[0]?.id ?? null);
+  }, []);
   const selectedPet =
-    MOCK_PETS.find((p) => p.id === selectedPetId) ?? MOCK_PETS[0];
-  const weightHistory = WEIGHT_HISTORY[selectedPetId] ?? WEIGHT_HISTORY["1"];
+    MOCK_PETS.find((p) => p.id === (selectedPetId ?? MOCK_PETS[0]?.id)) ??
+    MOCK_PETS[0];
+  const weightHistory =
+    WEIGHT_HISTORY[selectedPet?.id ?? "1"] ?? WEIGHT_HISTORY["1"];
 
   const quickActions = [
     {
@@ -78,7 +86,7 @@ export default function HealthScreen() {
           {/* Pet Selector */}
           <PetSelector
             pets={MOCK_PETS}
-            selectedPetId={selectedPetId}
+            selectedPetId={selectedPetId ?? MOCK_PETS[0]?.id ?? ""}
             onSelectPet={setSelectedPetId}
           />
 
