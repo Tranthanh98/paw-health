@@ -6,14 +6,28 @@ import {
   Pill,
   ThemeText,
 } from "@/components/ui";
+import type { Pet } from "@/db/models";
+import { observePets } from "@/db/queries/pets";
+import { useUIStore } from "@/stores/uiStore";
 import { router } from "expo-router";
 import { Bell, Droplet, Syringe } from "lucide-react-native";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const CURRENT_USER_ID = "local-user";
+
 export default function HomeScreen() {
   const { t } = useTranslation();
+  const { setSelectedPetId } = useUIStore();
+  const [pets, setPets] = useState<Pet[]>([]);
+
+  useEffect(() => {
+    const subscription = observePets(CURRENT_USER_ID).subscribe(setPets);
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <SafeAreaView className="flex-1 bg-background">
       <ScrollView
@@ -66,23 +80,20 @@ export default function HomeScreen() {
               decelerationRate="fast"
             >
               <PetCard isAddCard onPress={() => router.push("/pet/new")} />
-              <PetCard
-                petName="Bánh Bao"
-                petBreed="Golden Retriever"
-                petWeight="25 kg"
-                petGender="male"
-                vaccination="3/4"
-                petImage="https://lh3.googleusercontent.com/aida-public/AB6AXuBzU812OrIcT2QsCTCBTp20tHIftjRMcqiteJyVcC60-hv38aGaumlYA2xHovEQsv5ArM0aCU8zVNT1J4eRez-tsxNUL0MQAXfXwK0i0K7YoMJ_AnTeadfl-cFTIS5gIS6KLgYEq6itPQXWJmt1Bpreenkkh0v0mix_jfCK4j9sCSv2-6FDJWWuRaGzw_qz7eormiSOjLPLxx4U6g1VmBi7fYAC1O2uABodcn31sSJygr7DFYvZtV2zIGIBFHKAE3wV8OxzsWd2IA1X"
-                onPress={() => console.log("View pet")}
-              />
-              <PetCard
-                petName="Miu Miu"
-                petBreed="Scottish Fold"
-                petWeight="4.5 kg"
-                petGender="female"
-                vaccination="4/4"
-                onPress={() => console.log("View pet")}
-              />
+              {pets.map((pet) => (
+                <PetCard
+                  key={pet.id}
+                  petName={pet.name}
+                  petBreed={pet.breed}
+                  petWeight={pet.weightKg ? `${pet.weightKg} kg` : undefined}
+                  petGender={pet.gender}
+                  petImage={pet.photoUri ?? undefined}
+                  onPress={() => {
+                    setSelectedPetId(pet.id);
+                    router.push("/(tabs)/health");
+                  }}
+                />
+              ))}
             </ScrollView>
           </View>
 

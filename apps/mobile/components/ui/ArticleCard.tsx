@@ -24,7 +24,7 @@ export function ArticleCard({
 }: ArticleCardProps) {
   return (
     <Pressable
-      className={`flex-row gap-3 rounded-3xl bg-surface border border-background p-3 shadow-sm ${className}`.trim()}
+      className={`flex-row gap-3 rounded-3xl bg-surface border border-background p-3 ${className}`.trim()}
       {...props}
     >
       {/* Image */}

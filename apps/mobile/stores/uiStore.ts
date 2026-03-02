@@ -27,6 +27,10 @@ interface UIState {
   // Services tab
   selectedServiceCategory: string | null;
   setSelectedServiceCategory: (id: string | null) => void;
+
+  // Pet data refresh trigger (incremented when pet is updated/deleted)
+  petDataVersion: number;
+  triggerPetDataRefresh: () => void;
 }
 
 // ─── Store ────────────────────────────────────────────────────────────────
@@ -46,6 +50,11 @@ export const useUIStore = create<UIState>((set) => ({
   // Health filters
   healthFilter: "all",
   setHealthFilter: (filter) => set({ healthFilter: filter }),
+
+  // Pet data refresh
+  petDataVersion: 0,
+  triggerPetDataRefresh: () =>
+    set((state) => ({ petDataVersion: state.petDataVersion + 1 })),
 
   // Services
   selectedServiceCategory: null,

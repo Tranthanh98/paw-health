@@ -4,7 +4,7 @@ import type { QuickAction } from "./types";
 
 interface QuickActionsProps {
   actions: QuickAction[];
-  onActionPress?: (label: string) => void;
+  onActionPress?: (action: string) => void;
 }
 
 export function QuickActions({ actions, onActionPress }: QuickActionsProps) {
@@ -12,9 +12,9 @@ export function QuickActions({ actions, onActionPress }: QuickActionsProps) {
     <View className="flex-row gap-3">
       {actions.map((action) => (
         <Pressable
-          key={action.label}
+          key={action.action}
           className="flex-1 items-center gap-2"
-          onPress={() => onActionPress?.(action.label)}
+          onPress={() => onActionPress?.(action.action)}
         >
           <View
             className="w-12 h-12 rounded-2xl items-center justify-center"

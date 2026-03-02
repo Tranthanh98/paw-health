@@ -108,7 +108,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* Premium Promo */}
-        <View className="mb-6 rounded-3xl overflow-hidden shadow-lg">
+        <View className="mb-6 rounded-3xl overflow-hidden">
           <LinearGradient
             colors={["#111827", "#1F2937"]}
             start={{ x: 0, y: 0 }}

@@ -31,6 +31,7 @@ export interface MedicalRecord {
 }
 
 export interface QuickAction {
+  action: string;
   icon: React.ReactNode;
   label: string;
   bg: string;

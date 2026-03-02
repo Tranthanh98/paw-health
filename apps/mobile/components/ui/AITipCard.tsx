@@ -21,7 +21,7 @@ export function AITipCard({ tip, className = "", ...props }: AITipCardProps) {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <View className="rounded-xl p-2 border border-accent/20 shadow-md overflow-hidden">
+        <View className="rounded-xl p-2 border border-accent/20 overflow-hidden">
           <View className="flex-row gap-4 relative z-10 justify-center items-center">
             {/* Icon */}
             <View className="w-12 h-12 rounded-full bg-accent items-center justify-center">

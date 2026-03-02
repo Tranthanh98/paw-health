@@ -95,7 +95,7 @@ export function BirthdayInput({ value, onChange }: BirthdayInputProps) {
 
             <Pressable
               onPress={handleConfirm}
-              className="mx-5 bg-primary items-center py-4 rounded-full shadow-sm"
+              className="mx-5 bg-primary items-center py-4 rounded-full"
             >
               <ThemeText className="text-surface font-bold text-base">
                 OK

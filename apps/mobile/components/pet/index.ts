@@ -1,3 +1,4 @@
+export { AddWeightModal } from "./AddWeightModal";
 export { BirthdayInput } from "./BirthdayInput";
 export { BreedSelector } from "./BreedSelector";
 export { GenderToggle } from "./GenderToggle";

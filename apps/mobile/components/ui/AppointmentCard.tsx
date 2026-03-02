@@ -33,7 +33,7 @@ export function AppointmentCard({
 
   return (
     <Pressable
-      className={`w-[160px] rounded-3xl bg-surface border border-background p-4 shadow-sm ${className}`.trim()}
+      className={`w-[160px] rounded-3xl bg-surface border border-background p-4 ${className}`.trim()}
       {...props}
     >
       {/* Icon */}

@@ -44,6 +44,28 @@ export function observeHealthByType(petId: string, type: HealthRecordType) {
     .observe();
 }
 
+/** Observe vaccine records for a pet (reactive). */
+export function observeVaccinesByPet(petId: string) {
+  return observeHealthByType(petId, "vaccine");
+}
+
+/** Observe visit-type records for a pet (reactive). */
+export function observeVisitsByPet(petId: string, limit?: number) {
+  const query = healthRecordsCollection.query(
+    Q.where("pet_id", petId),
+    Q.or(
+      Q.where("type", "checkup"),
+      Q.where("type", "treatment"),
+      Q.where("type", "surgery"),
+      Q.where("type", "dental"),
+      Q.where("type", "other"),
+    ),
+    Q.sortBy("recorded_at", Q.desc),
+    ...(limit ? [Q.take(limit)] : []),
+  );
+  return query.observe();
+}
+
 // ─── Read — one-shot fetch ────────────────────────────────────────────────
 
 /** Last N weight entries for charting, ordered oldest → newest. */

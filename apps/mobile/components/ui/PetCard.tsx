@@ -46,7 +46,7 @@ export function PetCard({
 
   return (
     <Pressable
-      className={`w-[140px] rounded-3xl bg-primary p-4 shadow-md ${className}`.trim()}
+      className={`w-[140px] rounded-3xl bg-primary p-4 ${className}`.trim()}
       {...props}
     >
       <View className="items-center">

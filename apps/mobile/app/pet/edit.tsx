@@ -8,10 +8,11 @@ import {
   WeightInput,
 } from "@/components/pet";
 import { ThemeText } from "@/components/ui";
-import { createPet } from "@/db/queries/pets";
-import { router } from "expo-router";
-import { ArrowLeft, Save } from "lucide-react-native";
-import { useState } from "react";
+import { deletePet, fetchPet, updatePet } from "@/db/queries/pets";
+import { useUIStore } from "@/stores/uiStore";
+import { router, useLocalSearchParams } from "expo-router";
+import { ArrowLeft, Save, Trash2 } from "lucide-react-native";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Alert,
@@ -24,8 +25,14 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// TODO: replace with real authenticated user ID once auth is wired up
-const CURRENT_USER_ID = "local-user";
+function formatBirthday(timestamp: number | null | undefined): string {
+  if (!timestamp) return "";
+  const date = new Date(timestamp);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
 
 function parseBirthday(value: string): number | undefined {
   if (!value) return undefined;
@@ -34,8 +41,12 @@ function parseBirthday(value: string): number | undefined {
   return new Date(year, month - 1, day).getTime();
 }
 
-export default function NewPetScreen() {
+export default function EditPetScreen() {
   const { t } = useTranslation();
+  const { petId } = useLocalSearchParams<{ petId: string }>();
+  const triggerPetDataRefresh = useUIStore(
+    (state) => state.triggerPetDataRefresh,
+  );
 
   const [petName, setPetName] = useState("");
   const [species, setSpecies] = useState<Species>("dog");
@@ -44,8 +55,38 @@ export default function NewPetScreen() {
   const [weight, setWeight] = useState("");
   const [birthday, setBirthday] = useState("");
   const [photoUri, setPhotoUri] = useState<string | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   const inset = useSafeAreaInsets();
+
+  // Load pet data on mount
+  useEffect(() => {
+    if (!petId) {
+      Alert.alert("Error", "Pet ID not found");
+      router.back();
+      return;
+    }
+
+    const loadPet = async () => {
+      try {
+        const pet = await fetchPet(petId);
+        setPetName(pet.name);
+        setSpecies(pet.species);
+        setBreed(pet.breed);
+        setGender(pet.gender);
+        setWeight(String(pet.weightKg || ""));
+        setBirthday(formatBirthday(pet.birthday));
+        setPhotoUri(pet.photoUri ?? undefined);
+        setIsLoading(false);
+      } catch (err) {
+        console.error("[EditPet] failed to load:", err);
+        Alert.alert("Error", "Could not load pet data");
+        router.back();
+      }
+    };
+
+    loadPet();
+  }, [petId]);
 
   const handleSave = async () => {
     if (!petName.trim()) {
@@ -54,9 +95,10 @@ export default function NewPetScreen() {
       );
       return;
     }
+
     try {
-      await createPet({
-        userId: CURRENT_USER_ID,
+      const pet = await fetchPet(petId!);
+      await updatePet(pet, {
         name: petName.trim(),
         species,
         breed,
@@ -65,26 +107,69 @@ export default function NewPetScreen() {
         weightKg: parseFloat(weight) || 0,
         photoUri,
       });
+      // Trigger refresh in health screen before navigating back
+      triggerPetDataRefresh();
       router.back();
     } catch (err) {
-      console.error("[NewPet] failed to save:", err);
-      Alert.alert("Error", "Could not save pet. Please try again.");
+      console.error("[EditPet] failed to save:", err);
+      Alert.alert("Error", "Could not save changes. Please try again.");
     }
   };
+
+  const handleDelete = () => {
+    Alert.alert(
+      t("editPet.deleteConfirm") || "Delete Pet",
+      t("editPet.deleteMessage") ||
+        "Are you sure you want to delete this pet? This action cannot be undone.",
+      [
+        { text: t("common.cancel") || "Cancel", style: "cancel" },
+        {
+          text: t("common.delete") || "Delete",
+          onPress: async () => {
+            try {
+              const pet = await fetchPet(petId!);
+              await deletePet(pet);
+              // Trigger refresh in health screen before navigating back
+              triggerPetDataRefresh();
+              router.back();
+            } catch (err) {
+              console.error("[EditPet] failed to delete:", err);
+              Alert.alert("Error", "Could not delete pet");
+            }
+          },
+          style: "destructive",
+        },
+      ],
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-background items-center justify-center">
+        <ThemeText tone="muted">{t("common.loading")}</ThemeText>
+      </View>
+    );
+  }
 
   return (
     <View style={{ paddingTop: inset.top }} className="flex-1 bg-background">
       {/* Header */}
-      <View className="flex-row items-center px-4 py-3 border-b border-primary/10 bg-background">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-primary/10 bg-background">
         <Pressable
           onPress={() => router.back()}
           className="w-9 h-9 items-center justify-center rounded-full bg-primary/10"
         >
           <ArrowLeft size={20} color="#FF8C69" strokeWidth={2} />
         </Pressable>
-        <ThemeText className="flex-1 text-center text-lg font-bold mr-9">
-          {t("addPet.title")}
+        <ThemeText className="flex-1 text-center text-lg font-bold">
+          {t("editPet.title") || "Edit Pet"}
         </ThemeText>
+        <Pressable
+          onPress={handleDelete}
+          className="w-9 h-9 items-center justify-center rounded-full bg-error/10"
+        >
+          <Trash2 size={20} color="#EF4444" strokeWidth={2} />
+        </Pressable>
       </View>
 
       <KeyboardAvoidingView
@@ -158,7 +243,7 @@ export default function NewPetScreen() {
             >
               <Save size={20} color="#FFFFFF" strokeWidth={2} />
               <ThemeText className="text-surface font-bold text-base">
-                {t("addPet.saveProfile")}
+                {t("editPet.saveChanges") || "Save Changes"}
               </ThemeText>
             </Pressable>
           </View>

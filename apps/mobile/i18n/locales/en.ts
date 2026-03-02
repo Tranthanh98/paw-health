@@ -2,10 +2,18 @@ export default {
   common: {
     seeAll: "See all",
     addPet: "Add Pet",
+    cancel: "Cancel",
+    delete: "Delete",
+    loading: "Loading...",
+    yearsOld: "years old",
   },
   addPet: {
     title: "Add Pet",
     addPhoto: "Add photo",
+    changePhoto: "Change photo",
+    photoPermissionTitle: "Permission required",
+    photoPermissionMessage:
+      "Please allow access to your photo library to upload pet photos.",
     species: "Species",
     dog: "Dog",
     cat: "Cat",
@@ -29,6 +37,16 @@ export default {
     addButton: "Add pet",
     infoMessage:
       "You can update vaccine and medical history information after creating the profile.",
+    validation: {
+      nameRequired: "Please enter a pet name",
+    },
+  },
+  editPet: {
+    title: "Edit Pet",
+    saveChanges: "Save Changes",
+    deleteConfirm: "Delete Pet",
+    deleteMessage:
+      "Are you sure you want to delete this pet? This action cannot be undone.",
   },
   profile: {
     title: "Profile",

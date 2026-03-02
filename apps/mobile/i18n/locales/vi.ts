@@ -2,10 +2,18 @@ export default {
   common: {
     seeAll: "Xem tất cả",
     addPet: "Thêm Pet",
+    cancel: "Hủy",
+    delete: "Xóa",
+    loading: "Đang tải...",
+    yearsOld: "tuổi",
   },
   addPet: {
     title: "Thêm thú cưng",
     addPhoto: "Thêm ảnh",
+    changePhoto: "Thay đổi ảnh",
+    photoPermissionTitle: "Cấp quyền cần thiết",
+    photoPermissionMessage:
+      "Vui lòng cho phép truy cập thư viện ảnh của bạn để tải ảnh thú cưng.",
     species: "Loài",
     dog: "Chó",
     cat: "Mèo",
@@ -29,6 +37,16 @@ export default {
     addButton: "Thêm thú cưng",
     infoMessage:
       "Bạn có thể cập nhật thêm thông tin về vaccine, lịch sử y tế sau khi tạo hồ sơ.",
+    validation: {
+      nameRequired: "Vui lòng nhập tên thú cưng",
+    },
+  },
+  editPet: {
+    title: "Sửa thú cưng",
+    saveChanges: "Lưu thay đổi",
+    deleteConfirm: "Xóa thú cưng",
+    deleteMessage:
+      "Bạn chắc chắn muốn xóa thú cưng này? Hành động này không thể hoàn tác.",
   },
   profile: {
     title: "Cá nhân",
